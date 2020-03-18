@@ -7,6 +7,7 @@ var citySearchEl = document.getElementById("city-search");
 
 
 
+
 // this is an onclick moment
 // on click should take in search string from input field 
 $("#city-search").click(function(event) {
@@ -20,9 +21,12 @@ $("#city-search").click(function(event) {
 // review activity 5 for logging weather details 
 // on click should take in search string from input field 
 
-  var APIKey = "&appid=f0a99970ea6087abea42e16178a65bb8";
-  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
+    var APIKey = "&appid=f0a99970ea6087abea42e16178a65bb8";
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
+        city + APIKey;
+    var queryForecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" +
     city + APIKey;
+
 
   // open weather api, will need a var for queryURL + input + apikey
   $.ajax({
@@ -40,12 +44,30 @@ $("#city-search").click(function(event) {
       
       // Convert the temp to fahrenheit
       var tempF = (response.main.temp - 273.15) * 1.80 + 32;
-      $(".tempF").text("Temperature (F) " + tempF.toFixed(2));
+      $(".tempF").text("Temperature (F) " + tempF.toFixed(2)); 
 
     });
 
-});
+    $.ajax({
+        url: queryForecastURL,
+        method: "GET"
+      })
+        // We store all of the retrieved data inside of an object called "response"
+        .then(function(response) {
+            console.log(response)
+          // Transfer content to HTML
+        //   $(".city").html("<h1>" + response.name + " Weather Details</h1>");
+        //   $(".wind").text("Wind Speed: " + response.wind.speed);
+        //   $(".humidity").text("Humidity: " + response.main.humidity);
+          
+          
+        //   // Convert the temp to fahrenheit
+        //   var tempF = (response.main.temp - 273.15) * 1.80 + 32;
+        //   $(".tempF").text("Temperature (F) " + tempF.toFixed(2)); 
+    
+        });
 
+});
 
 
 
