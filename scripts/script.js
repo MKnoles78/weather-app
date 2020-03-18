@@ -4,6 +4,7 @@ var cityInputEl = document.getElementById("city-input");
 // this element is the input field for the city search 
 var citySearchEl = document.getElementById("city-search");
 // this element is for the search button which pulls data from input field 
+var currentDayEl = document.getElementById("currentDay");
 
 
 
@@ -17,6 +18,7 @@ $("#city-search").click(function(event) {
     console.log(city);
     tRow.append(city);
     $("tbody").append(tRow)
+    currentDayEl.innerHTML = moment().format('dddd, MMM Do');
   
 // review activity 5 for logging weather details 
 // on click should take in search string from input field 
